@@ -7,25 +7,19 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 5001; 
 
-//  KONFIGURACJA CORS
-const corsOptions = {
-    origin: process.env.FRONTEND_URL || "*", 
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-    optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+// 1. UPROSZCZONA KONFIGURACJA CORS (Najbezpieczniejsza na czas obrony)
+app.use(cors()); 
 app.use(express.json());
 
-//  POŁĄCZENIE Z MONGODB 
-mongoose.connect(process.env.MONGO_URI)
+// 2. POŁĄCZENIE Z MONGODB (Zmieniono na MONGODB_URI, aby pasowało do Rendera)
+const mongoURI = process.env.MONGODB_URI || process.env.MONGO_URI;
+
+mongoose.connect(mongoURI)
   .then(() => console.log('✅ Połączono z bazą MongoDB!'))
   .catch(err => console.error('❌ Błąd połączenia z MongoDB:', err));
 
 
-// SCHEMATY MONGODB
-
+// --- SCHEMATY MONGODB (Bez zmian) ---
 
 const userSchema = new mongoose.Schema({
   login: String, 
@@ -83,10 +77,9 @@ const transporter = nodemailer.createTransport({
 });
 
 
-// ENDPOINTY (API)
+// --- ENDPOINTY (API) (Bez zmian) ---
 
-
-//  LOGOWANIE 
+// LOGOWANIE 
 app.post('/api/login', async (req, res) => {
     const { pesel, password } = req.body; 
     try {
@@ -101,7 +94,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-//  USTAWIENIA SYSTEMU 
+// USTAWIENIA SYSTEMU 
 app.get('/api/system', async (req, res) => {
   try {
     const systemData = await SystemData.findOne({ configId: 'main' });
@@ -124,7 +117,7 @@ app.put('/api/system', async (req, res) => {
   }
 });
 
-//  PACJENCI I KARTOTEKI 
+// PACJENCI I KARTOTEKI 
 app.get('/api/patients', async (req, res) => {
   try {
     const patients = await Patient.find();
@@ -160,7 +153,7 @@ app.put('/api/patients/:pesel/assign', async (req, res) => {
   }
 });
 
-//  UŻYTKOWNICY 
+// UŻYTKOWNICY 
 app.get('/api/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -227,7 +220,7 @@ app.put('/api/users/:id', async (req, res) => {
   }
 });
 
-//  GRAFIK LEKARZA 
+// GRAFIK LEKARZA 
 app.get('/api/daily-schedule/:login/:date', async (req, res) => {
   try {
     const entry = await DailySchedule.findOne({ 
@@ -280,7 +273,7 @@ app.post('/api/weekly-schedule', async (req, res) => {
   }
 });
 
-//  E-RECEPTY 
+// E-RECEPTY 
 app.get('/api/prescriptions/:pesel', async (req, res) => {
   try {
     const list = await Prescription.find({ patientPesel: req.params.pesel });
@@ -335,7 +328,7 @@ app.post('/api/prescriptions', async (req, res) => {
   }
 });
 
-//  START 
+// START 
 app.listen(PORT, () => {
   console.log(`🚀 Serwer działa na porcie: ${PORT}`);
 });
