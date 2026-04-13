@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2 } from 'lucide-react';
+import { Volume2, ZoomIn, ZoomOut } from 'lucide-react';
 
 const LoginPage = ({ pesel, setPesel, password, setPassword, handleLogin, isLargeText, speak, error }) => {
   const [hoveredBtn, setHoveredBtn] = useState(null);

@@ -28,7 +28,9 @@ import {
   Plus,
   Trash2,
   Pill,
-  Stethoscope
+  Stethoscope,
+  ZoomIn,
+  ZoomOut
 } from 'lucide-react';
 
 
@@ -412,7 +414,7 @@ const DoctorDashboard = ({ user, onLogout, isLargeText, setIsLargeText }) => {
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '15px', height: '60px' }}>
-          <button onClick={() => setIsLargeText(!isLargeText)} style={{ height: '60px', padding: isLargeText ? '0 15px' : '0 18px', borderRadius: '15px', backgroundColor: isLargeText ? '#3B82F6' : '#1E3A8A', color: 'white', fontSize: `${20 * fontScale}px`, fontWeight: '900', cursor: 'pointer', border: `1px solid ${BORDER_BLUE}`, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'pulse-yellow-glow 2s infinite', fontFamily: FONT_FAMILY }}> {isLargeText ? '- 60' : '+ 60'} </button>
+          <button onClick={() => setIsLargeText(!isLargeText)} style={{ height: '60px', padding: isLargeText ? '0 15px' : '0 18px', borderRadius: '15px', backgroundColor: isLargeText ? '#3B82F6' : '#1E3A8A', color: 'white', fontSize: `${20 * fontScale}px`, fontWeight: '900', cursor: 'pointer', border: `1px solid ${BORDER_BLUE}`, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'pulse-yellow-glow 2s infinite', fontFamily: FONT_FAMILY }}> {isLargeText ? <ZoomOut size={30} /> : <ZoomIn size={30} />} </button>
           <button onClick={handleLogoutAction} style={{ ...navButtonStyle('logout'), backgroundColor: '#1E3A8A', color: 'white' }}> WYLOGUJ <LogOut size={isLargeText ? 28 : 20} /> </button>
         </div>
       </div>
@@ -729,12 +731,6 @@ const DoctorDashboard = ({ user, onLogout, isLargeText, setIsLargeText }) => {
                               >
                                 <Edit size={isLargeText ? 20 * pScale : 20} /> EDYTUJ DANE
                               </button>
-                            )}
-                            {!isEditing && (
-                              <>
-                                <button style={{ flex: 1, padding: '15px', backgroundColor: '#1E3A8A', color: 'white', borderRadius: '12px', border: 'none', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: isLargeText ? `${14 * pScale}px` : '14px' }}><History size={isLargeText ? 20 * pScale : 20} /> HISTORIA</button>
-                                <button style={{ flex: 1, padding: '15px', backgroundColor: '#3B82F6', color: 'white', borderRadius: '12px', border: 'none', fontWeight: '800', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: isLargeText ? `${14 * pScale}px` : '14px' }}><FileText size={isLargeText ? 20 * pScale : 20} /> DOKUMENTY</button>
-                              </>
                             )}
                           </div>
                         </div>

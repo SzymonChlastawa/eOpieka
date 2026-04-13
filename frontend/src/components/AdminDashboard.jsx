@@ -18,7 +18,9 @@ import {
   ShieldCheck,
   Check,
   Calendar,
-  Crown
+  Crown,
+  ZoomIn,
+  ZoomOut
 } from 'lucide-react';
 
 const AdminDashboard = ({ user, onLogout, isLargeText, setIsLargeText }) => {
@@ -278,7 +280,7 @@ const AdminDashboard = ({ user, onLogout, isLargeText, setIsLargeText }) => {
               fontSize: `${20 * fontScale}px`, fontWeight: '900', cursor: 'pointer', border: `1px solid ${BORDER_BLUE}`,
               animation: 'pulse-yellow-glow 2s infinite'
             }}> 
-            {isLargeText ? '- 60' : '+ 60'} 
+            {isLargeText ? <ZoomOut size={30} /> : <ZoomIn size={30} />}
           </button>
           <button onClick={onLogout} style={{ ...navButtonStyle('logout'), backgroundColor: '#DC2626', color: 'white', border: 'none' }}> WYLOGUJ <LogOut size={isLargeText ? 28 : 20} /> </button>
         </div>

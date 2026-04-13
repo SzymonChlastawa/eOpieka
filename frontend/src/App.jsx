@@ -133,7 +133,7 @@ function App() {
               textTransform: 'uppercase'
             }}
           >
-            {isLargeText ? '- 60' : '+ 60'}
+            {isLargeText ? <ZoomOut size={30} /> : <ZoomIn size={30} />}
           </button>
         </>
       )}

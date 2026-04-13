@@ -19,7 +19,9 @@ import {
   Volume2,
   IdCard,
   Heart,
-  ClipboardList
+  ClipboardList,
+  ZoomIn,
+  ZoomOut
 } from 'lucide-react';
 
 const PatientDashboard = ({ user, onLogout, isLargeText, setIsLargeText }) => {
@@ -227,7 +229,7 @@ const PatientDashboard = ({ user, onLogout, isLargeText, setIsLargeText }) => {
               fontFamily: FONT_FAMILY
             }}
           >
-             {isLargeText ? '- 60' : '+ 60'}
+            {isLargeText ? <ZoomOut size={35} /> : <ZoomIn size={35} />}
           </button>
 
           <button onClick={() => { window.speechSynthesis.cancel(); onLogout(); }} onMouseEnter={() => setHoveredBtn('logout')} onMouseLeave={() => setHoveredBtn(null)}
